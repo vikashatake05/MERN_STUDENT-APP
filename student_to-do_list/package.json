@@ -1,4 +1,4 @@
-{
+ {
   "name": "student_to-do_list",
   "private": true,
   "version": "0.0.0",
@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

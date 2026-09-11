@@ -54,7 +54,7 @@ main {
 }
 
 .stack-card {
-    background-color: rgb(101, 48, 35);
+    background-color: rgb(213, 83, 83);
 
     border: 1px solid #fdf8f8;
     border-radius: 6px;
@@ -71,15 +71,6 @@ main > h2 {
     margin-bottom: 15px;
 }
 
-
-/* Task Cards */
-
-.tasks-container {
-    display: flex;
-    flex-direction: column;
-    gap: 45px;
-}
-
 /*task-card*/
 .task-container{
     display: flex;
@@ -88,7 +79,7 @@ main > h2 {
 }
 .task-card {
 
-   background-color: rgb(156, 72, 53);
+   background-color: rgb(102, 97, 96);
 
     border: 1px solid #f4f1f1;
     border-radius: 6px;
@@ -106,4 +97,59 @@ main > h2 {
 }
 .task-card p{
     margin: 0;
+}
+
+/* add task */
+.add-task {
+    background-color: rgb(102, 97, 96);
+    border: 1px solid #f4f1f1;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.add-task form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.add-task input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d9d7d7;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.add-task label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f5f5f5;
+}
+
+.add-task button {
+    align-self: flex-start;
+    background-color: rgb(79, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add-task button:hover {
+    background-color: rgb(110, 0, 0);
+}
+.DelTask {
+    background-color: rgb(79, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
 }
