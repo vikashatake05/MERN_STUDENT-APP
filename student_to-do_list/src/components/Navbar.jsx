@@ -5,10 +5,9 @@ function Navbar(){
         <nav>
             <h2>Student Task Portal</h2>
             <div className="nav-links">
-                <span>dashboard</span>
-                <span>Tasks</span>
+                <NavLink to="/">dashboard</NavLink>
+                <NavLink to="/tasks">Tasks</NavLink>
             </div>
-
         </nav>
     );    
 }
