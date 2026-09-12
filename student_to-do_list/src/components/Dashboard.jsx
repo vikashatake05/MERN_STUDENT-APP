@@ -4,6 +4,14 @@ import AddTask from "./AddTask";
 
 function Dashboard(props) {
 
+    const totalTasks = props.tasks.length;
+    const completedTasks = props.tasks.filter(
+        (task) => task.status.toLowerCase() === "completed"
+    ).length;
+    const pendingTasks = props.tasks.filter(
+        (task) => task.status.toLowerCase() === "pending"
+    ).length;
+
     function toggleTask(id){
         props.setTasks(
             props.tasks.map((task) => {
@@ -33,9 +41,9 @@ function Dashboard(props) {
         <main>
         
             <div className="stack-container">
-                <StatCard title="Total Tasks" value="10"/>
-                <StatCard title="Completed" value="6"/>
-                <StatCard title="Pending" value="4"/>
+                <StatCard title="Total Tasks" value={totalTasks}/>
+                <StatCard title="Completed" value={completedTasks}/>
+                <StatCard title="Pending" value={pendingTasks}/>
                 
             </div>
 
