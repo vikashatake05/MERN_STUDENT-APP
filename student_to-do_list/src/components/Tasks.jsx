@@ -1,9 +1,10 @@
-function Tasks() {
+function Tasks(){
     return (
         <div>
-            <h1> Tasks </h1>
-            <p>All Students' Tasks will be displayed here.</p>
+            <h1>Tasks Page</h1>
+            <p>All the students tasks will appear here!</p>
         </div>
     );
 }
+
 export default Tasks;
