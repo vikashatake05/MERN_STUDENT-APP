@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function Taskcard(props){
     return(
         <div className="task-card">
@@ -7,6 +8,9 @@ function Taskcard(props){
             <button onClick={props.onToggle}
             > change status</button>
             <button onClick={props.onDelete}>delete</button>
+            <Link to={`/tasks/${props.id}`}>
+                View Details
+            </Link>
         </div>
     );
 }

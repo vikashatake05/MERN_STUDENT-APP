@@ -43,7 +43,7 @@ function Dashboard(props) {
 
             <h2>Recent Tasks</h2>
 
-            <div className="tasks-container">
+            <div className="task-container">
                 {props.tasks.map((task)=>(
                     <TaskCard 
                         key={task.id} 
