@@ -28,7 +28,11 @@ function Dashboard(props) {
     }
 
     function addTask(newTask){
-        props.setTasks([...props.tasks, newTask]);
+        const nextId = props.tasks.reduce(
+            (highestId, task) => Math.max(highestId, Number(task.id) || 0),
+            0
+        ) + 1;
+        props.setTasks([...props.tasks, {...newTask, id: nextId}]);
     }
 
     function deleteTask(id){

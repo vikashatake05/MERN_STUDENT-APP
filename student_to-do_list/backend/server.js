@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(cors());// use cors middleware to handle requests from different origins
+app.use(express.json());// use express.json() middleware to parse incoming JSON requests
 
 const tasks =[
         {
@@ -29,11 +30,32 @@ const tasks =[
         }
     ];
 
-
+//read operation  in backend
 app.get("/api/tasks", (req, res) => {
     res.json(tasks);
     });
 
+app.get("/api/tasks/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const task = tasks.find((task) => task.id === id);
+    if (!task) {
+        return res.status(404).json({ error: "Task not found" });
+    }
+    res.json(task);
+});
+
+// create operation in backend
+app.post("/api/tasks", (req, res) => {
+    const nextId = tasks.reduce(
+        (highestId, task) => Math.max(highestId, Number(task.id) || 0), 0) + 1;
+    const newTask = { ...req.body, id: nextId };
+    tasks.push(newTask);
+    res.json(newTask);
+});
+
+// update operation in backend
+
+    
 //our api route (testing)
 app.listen(5050, () => {
     console.log("Server is running on port 5050");

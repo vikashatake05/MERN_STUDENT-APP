@@ -4,27 +4,42 @@ export default function AddTask(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    const taskTitle = title.trim();
-    const taskDescription = description.trim();
+    const trimmedTitle = title.trim();
+    const trimmedDescription = description.trim();
 
-    if (!taskTitle && !taskDescription) return;
-
-    const task = {
-      id: Date.now(),
-      title: taskTitle,
-      description: taskDescription,
-      status: "pending",
+    if (!trimmedTitle || !trimmedDescription) {
+      alert("Please fill in both title and description.");
+      return;
+    }
+    const newTask = {
+      title: trimmedTitle,
+      description: trimmedDescription,
+      status: "Pending",
     };
 
-    if (props.onAddTask) {
-      props.onAddTask(task);
-    }
+    try {
+      const response = await fetch("http://localhost:5050/api/tasks",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newTask),
+        }
+      );
 
-    setTitle("");
-    setDescription("");
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      const savedTask = await response.json();
+      props.onAddTask(savedTask);
+      setTitle("");
+      setDescription("");
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
   }
 
   return (
