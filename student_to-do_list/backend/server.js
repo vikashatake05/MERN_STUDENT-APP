@@ -54,8 +54,26 @@ app.post("/api/tasks", (req, res) => {
 });
 
 // update operation in backend
+app.put("/api/tasks/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const task = tasks.find((task) => task.id === id);
+    if (!task) {
+        return res.status(404).json({ error: "Task not found" });
+    }
+    task.status = req.body.status;
+    res.json(task);
+});
 
-    
+// delete operation in backend
+app.delete("/api/tasks/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const taskIndex = tasks.findIndex((task) => task.id === id);
+    if (taskIndex === -1) {
+        return res.status(404).json({ error: "Task not found" });
+    }
+   const deletedTask = tasks.splice(taskIndex, 1);
+    res.json(deletedTask[0]);
+})
 //our api route (testing)
 app.listen(5050, () => {
     console.log("Server is running on port 5050");

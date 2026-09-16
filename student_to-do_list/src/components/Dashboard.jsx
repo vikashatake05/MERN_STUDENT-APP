@@ -12,15 +12,19 @@ function Dashboard(props) {
         (task) => task.status.toLowerCase() === "pending"
     ).length;
 
-    function toggleTask(id){
+    async function toggleTask(id){
+        const task = props.tasks.find((task) => task.id === id);
+        const newStatus = task.status === "Completed" ? "Pending" : "Completed";
+        const response = await fetch(`http://localhost:5050/api/tasks/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status: newStatus }),
+        });
+        const updateTask = await response.json();
         props.setTasks(
             props.tasks.map((task) => {
                 if(task.id === id){
-                    return {...task, 
-                        status: task.status === "Completed" 
-                                    ? "Pending" 
-                                    : "Completed"
-                    };
+                    return updateTask;
                 }
                 return task;
             })
@@ -35,11 +39,17 @@ function Dashboard(props) {
         props.setTasks([...props.tasks, {...newTask, id: nextId}]);
     }
 
-    function deleteTask(id){
-        props.setTasks(
-            props.tasks.filter((task)=>task.id !==id)
+    async function deleteTask(id) {
+        const response = await fetch(`http://localhost:5050/api/tasks/${id}`, {
+            method: "DELETE",
+        });
+        const deletedTask = await response.json();
+        props.setTasks((tasks) =>
+            tasks.filter((task) => task.id !== deletedTask.id)
         );
     }
+       
+
 
     return (
         <main>
