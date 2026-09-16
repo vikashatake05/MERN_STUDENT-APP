@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // bring express in node.js
 const express = require("express");
 
@@ -12,8 +14,19 @@ app.get("/", (req, res) => {
     res.send("Back-end server is running");
 });
 
+//mongoose connection
+const mongoose = require("mongoose");
+
 app.use(cors());// use cors middleware to handle requests from different origins
 app.use(express.json());// use express.json() middleware to parse incoming JSON requests
+
+mongoose.connect(process.env.MONGODB_URL)
+.then(() => {
+    console.log("Connected to MongoDB");
+})
+.catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+});
 
 const tasks =[
         {
