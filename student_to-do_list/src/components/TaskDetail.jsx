@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function TaskDetails(){
@@ -29,20 +29,41 @@ function TaskDetails(){
     },[id]);
 
     if (loading) {
-        return <h1>Loading...</h1>;
+        return <div className="task-detail-state">Loading task details...</div>;
     }
 
     if (error || !task) {
-
-        return <h1>Task not found</h1>;
+        return (
+            <div className="task-detail-state">
+                <h1>Task not found</h1>
+                <Link className="task-detail-back" to="/tasks">Back to all tasks</Link>
+            </div>
+        );
     }
+
     return (
-        <div>
-            <h1>Task Details</h1>
-            <h2>{task.title}</h2>
-            <h2>{task.description}</h2>
-            <h2>Status:{task.status}</h2>
-        </div>
+        <main className="task-detail-page">
+            <Link className="task-detail-back" to="/tasks">&lt;- Back to all tasks</Link>
+
+            <article className="task-detail-card">
+                <div className="task-detail-header">
+                    <div>
+                        <p className="task-detail-eyebrow">Task details</p>
+                        <h1>{task.title}</h1>
+                    </div>
+                    <span className={`task-status ${task.status.toLowerCase()}`}>
+                        {task.status}
+                    </span>
+                </div>
+
+                <div className="task-detail-divider" />
+
+                <section className="task-detail-description">
+                    <p className="task-detail-label">Description</p>
+                    <p>{task.description || "No description added for this task."}</p>
+                </section>
+            </article>
+        </main>
     );
 }
 export default TaskDetails;
